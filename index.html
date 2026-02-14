@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入设备检测工具</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>输入设备检测工具</h1>
+            <p class="subtitle">键盘 • 鼠标 • 麦克风</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-grid">
+            <!-- Keyboard Zone -->
+            <div class="keyboard-zone">
+                <div class="zone-title">键盘检测 <span id="key-display">就绪</span></div>
+                <div class="keyboard" id="keyboard">
+                    <!-- Function Keys -->
+                    <div class="kb-row">
+                        <div class="key k-sm" data-code="Escape">Esc</div>
+                        <div class="spacer"></div>
+                        <div class="key k-sm" data-code="F1">F1</div>
+                        <div class="key k-sm" data-code="F2">F2</div>
+                        <div class="key k-sm" data-code="F3">F3</div>
+                        <div class="key k-sm" data-code="F4">F4</div>
+                        <div class="spacer-sm"></div>
+                        <div class="key k-sm" data-code="F5">F5</div>
+                        <div class="key k-sm" data-code="F6">F6</div>
+                        <div class="key k-sm" data-code="F7">F7</div>
+                        <div class="key k-sm" data-code="F8">F8</div>
+                        <div class="spacer-sm"></div>
+                        <div class="key k-sm" data-code="F9">F9</div>
+                        <div class="key k-sm" data-code="F10">F10</div>
+                        <div class="key k-sm" data-code="F11">F11</div>
+                        <div class="key k-sm" data-code="F12">F12</div>
+                        <div class="spacer"></div>
+                        <div class="key k-sm" data-code="PrintScreen">PrtSc</div>
+                        <div class="key k-sm" data-code="ScrollLock">ScrLk</div>
+                        <div class="key k-sm" data-code="Pause">Pause</div>
+                    </div>
+
+                    <!-- Main Block + Nav + Numpad -->
+                    <div class="kb-main">
+                        <!-- Main Keys -->
+                        <div class="kb-main-left">
+                            <div class="kb-row">
+                                <div class="key" data-code="Backquote">`</div>
+                                <div class="key" data-code="Digit1">1</div>
+                                <div class="key" data-code="Digit2">2</div>
+                                <div class="key" data-code="Digit3">3</div>
+                                <div class="key" data-code="Digit4">4</div>
+                                <div class="key" data-code="Digit5">5</div>
+                                <div class="key" data-code="Digit6">6</div>
+                                <div class="key" data-code="Digit7">7</div>
+                                <div class="key" data-code="Digit8">8</div>
+                                <div class="key" data-code="Digit9">9</div>
+                                <div class="key" data-code="Digit0">0</div>
+                                <div class="key" data-code="Minus">-</div>
+                                <div class="key" data-code="Equal">=</div>
+                                <div class="key k-wide" data-code="Backspace">Back</div>
+                            </div>
+                            <div class="kb-row">
+                                <div class="key k-tab" data-code="Tab">Tab</div>
+                                <div class="key" data-code="KeyQ">Q</div>
+                                <div class="key" data-code="KeyW">W</div>
+                                <div class="key" data-code="KeyE">E</div>
+                                <div class="key" data-code="KeyR">R</div>
+                                <div class="key" data-code="KeyT">T</div>
+                                <div class="key" data-code="KeyY">Y</div>
+                                <div class="key" data-code="KeyU">U</div>
+                                <div class="key" data-code="KeyI">I</div>
+                                <div class="key" data-code="KeyO">O</div>
+                                <div class="key" data-code="KeyP">P</div>
+                                <div class="key" data-code="BracketLeft">[</div>
+                                <div class="key" data-code="BracketRight">]</div>
+                                <div class="key k-enter" data-code="Backslash">\</div>
+                            </div>
+                            <div class="kb-row">
+                                <div class="key k-caps" data-code="CapsLock">Caps</div>
+                                <div class="key" data-code="KeyA">A</div>
+                                <div class="key" data-code="KeyS">S</div>
+                                <div class="key" data-code="KeyD">D</div>
+                                <div class="key" data-code="KeyF">F</div>
+                                <div class="key" data-code="KeyG">G</div>
+                                <div class="key" data-code="KeyH">H</div>
+                                <div class="key" data-code="KeyJ">J</div>
+                                <div class="key" data-code="KeyK">K</div>
+                                <div class="key" data-code="KeyL">L</div>
+                                <div class="key" data-code="Semicolon">;</div>
+                                <div class="key" data-code="Quote">'</div>
+                                <div class="key k-enter-big" data-code="Enter">Enter</div>
+                            </div>
+                            <div class="kb-row">
+                                <div class="key k-shift" data-code="ShiftLeft">Shift</div>
+                                <div class="key" data-code="KeyZ">Z</div>
+                                <div class="key" data-code="KeyX">X</div>
+                                <div class="key" data-code="KeyC">C</div>
+                                <div class="key" data-code="KeyV">V</div>
+                                <div class="key" data-code="KeyB">B</div>
+                                <div class="key" data-code="KeyN">N</div>
+                                <div class="key" data-code="KeyM">M</div>
+                                <div class="key" data-code="Comma">,</div>
+                                <div class="key" data-code="Period">.</div>
+                                <div class="key" data-code="Slash">/</div>
+                                <div class="key k-shift" data-code="ShiftRight">Shift</div>
+                            </div>
+                            <div class="kb-row">
+                                <div class="key k-ctrl" data-code="ControlLeft">Ctrl</div>
+                                <div class="key k-win" data-code="MetaLeft">Win</div>
+                                <div class="key k-alt" data-code="AltLeft">Alt</div>
+                                <div class="key k-space" data-code="Space">Space</div>
+                                <div class="key k-alt" data-code="AltRight">Alt</div>
+                                <div class="key k-win" data-code="MetaRight">Win</div>
+                                <div class="key k-menu" data-code="ContextMenu">Menu</div>
+                                <div class="key k-ctrl" data-code="ControlRight">Ctrl</div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Block -->
+                        <div class="kb-nav">
+                            <div class="kb-row">
+                                <div class="key k-sm" data-code="Insert">Ins</div>
+                                <div class="key k-sm" data-code="Home">Home</div>
+                                <div class="key k-sm" data-code="PageUp">PgUp</div>
+                            </div>
+                            <div class="kb-row">
+                                <div class="key k-sm" data-code="Delete">Del</div>
+                                <div class="key k-sm" data-code="End">End</div>
+                                <div class="key k-sm" data-code="PageDown">PgDn</div>
+                            </div>
+                            <div class="spacer-vert"></div>
+                            <div class="arrow-keys">
+                                <div class="kb-row">
+                                    <div class="key-gap"></div>
+                                    <div class="key k-sm" data-code="ArrowUp">↑</div>
+                                    <div class="key-gap"></div>
+                                </div>
+                                <div class="kb-row">
+                                    <div class="key k-sm" data-code="ArrowLeft">←</div>
+                                    <div class="key k-sm" data-code="ArrowDown">↓</div>
+                                    <div class="key k-sm" data-code="ArrowRight">→</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Numpad -->
+                        <div class="kb-numpad">
+                            <div class="numpad-grid">
+                                <div class="key k-sm" data-code="NumLock">Num</div>
+                                <div class="key k-sm" data-code="NumpadDivide">/</div>
+                                <div class="key k-sm" data-code="NumpadMultiply">*</div>
+                                <div class="key k-sm" data-code="NumpadSubtract">-</div>
+                                <div class="key k-sm" data-code="Numpad7">7</div>
+                                <div class="key k-sm" data-code="Numpad8">8</div>
+                                <div class="key k-sm" data-code="Numpad9">9</div>
+                                <div class="key k-tall" data-code="NumpadAdd">+</div>
+                                <div class="key k-sm" data-code="Numpad4">4</div>
+                                <div class="key k-sm" data-code="Numpad5">5</div>
+                                <div class="key k-sm" data-code="Numpad6">6</div>
+                                <div class="key k-sm" data-code="Numpad1">1</div>
+                                <div class="key k-sm" data-code="Numpad2">2</div>
+                                <div class="key k-sm" data-code="Numpad3">3</div>
+                                <div class="key k-tall" data-code="NumpadEnter">Ent</div>
+                                <div class="key k-wide" data-code="Numpad0">0</div>
+                                <div class="key k-sm" data-code="NumpadDecimal">.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Panel (Mouse + Mic) -->
+            <div class="side-panel">
+                <!-- Mouse Zone -->
+                <div class="mouse-zone">
+                    <div class="zone-title">鼠标检测</div>
+                    <div class="mouse-content">
+                        <div class="mouse-visual">
+                            <div class="mouse-body">
+                                <div class="mouse-btn-top">
+                                    <div class="btn-left" id="btn-left">L</div>
+                                    <div class="btn-wheel" id="btn-wheel">
+                                        <div class="wheel-indicator"></div>
+                                    </div>
+                                    <div class="btn-right" id="btn-right">R</div>
+                                </div>
+                                <div class="mouse-side">
+                                    <div class="btn-side" id="btn-back">后</div>
+                                    <div class="btn-side" id="btn-fwd">前</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mouse-info">
+                            <div class="info-row">按键: <span id="mouse-btn-info">无</span></div>
+                            <div class="info-row">滚轮: <span id="mouse-scroll-info">0</span></div>
+                            <div class="info-row">位置: <span id="mouse-pos-info">-</span></div>
+                            <div class="dblclick-test" id="dblclick-area">双击测试</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Microphone Zone -->
+                <div class="mic-zone">
+                    <div class="zone-title">麦克风检测</div>
+                    <div class="mic-content">
+                        <div class="mic-controls">
+                            <select id="mic-select" class="mic-dropdown">
+                                <option value="">选择麦克风...</option>
+                            </select>
+                            <button id="mic-start-btn" class="mic-btn">开始</button>
+                        </div>
+                        <div class="mic-visualizer">
+                            <canvas id="mic-canvas" width="280" height="100"></canvas>
+                        </div>
+                        <div class="mic-level">
+                            <div class="level-label">音量:</div>
+                            <div class="level-bar">
+                                <div class="level-fill" id="level-fill"></div>
+                            </div>
+                            <span id="level-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (History Bar) -->
+        <footer class="history-bar">
+            <div class="history-title">按键历史:</div>
+            <div class="history-list" id="history-list"></div>
+            <button id="clear-history" class="clear-btn">清空</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
