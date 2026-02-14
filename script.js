@@ -207,8 +207,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 micSelect.appendChild(option);
             });
 
+            // 自动选择第一个设备
+            micSelect.selectedIndex = 1; // 选择第一个设备（索引0是"选择麦克风..."）
             micStartBtn.disabled = false;
             console.log(`✅ 找到 ${audioInputs.length} 个麦克风设备`);
+
+            // 自动启动麦克风
+            const firstDeviceId = audioInputs[0].deviceId;
+            try {
+                await startMicrophone(firstDeviceId);
+                micStartBtn.textContent = '停止';
+                micStartBtn.style.background = '#ff4444';
+                console.log('✅ 麦克风已自动启动');
+            } catch (err) {
+                console.error('自动启动麦克风失败:', err);
+                // 不弹出alert，静默失败
+            }
 
         } catch (err) {
             console.error('获取设备失败:', err);
