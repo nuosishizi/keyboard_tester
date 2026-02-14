@@ -34,18 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
         addToHistory(code, e.key);
     });
 
-    // Handle keyup
+    // Handle keyup - 保持高亮，不移除active
     document.addEventListener('keyup', (e) => {
-        const keyElement = keyMap.get(e.code);
-        if (keyElement) {
-            keyElement.classList.remove('active');
-        }
+        // 按键弹起时不移除高亮，保持标记状态
+        // 用户可以通过"清除"按钮清除所有高亮
     });
 
-    // Clear history
+    // Clear history and key highlights
     clearHistoryBtn.addEventListener('click', () => {
         historyList.innerHTML = '';
         keyDisplay.textContent = '就绪';
+
+        // 清除所有按键高亮
+        keys.forEach(key => key.classList.remove('active'));
     });
 
     function addToHistory(code, key) {

@@ -56,13 +56,21 @@ body {
     color: var(--text-secondary);
 }
 
-/* Main Grid */
+/* Main Grid - 上下布局 */
 .main-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     flex: 1;
     min-height: 0;
+}
+
+/* Bottom Panel - 鼠标和麦克风并排 */
+.bottom-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    min-height: 200px;
 }
 
 .zone-title {
@@ -218,12 +226,7 @@ body {
     width: 30px;
 }
 
-/* Side Panel */
-.side-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+/* Side Panel - 已移除，改为bottom-panel */
 
 /* Mouse Zone */
 .mouse-zone {
@@ -232,6 +235,7 @@ body {
     border-radius: 8px;
     padding: 12px;
     flex: 1;
+    min-width: 0;
 }
 
 .mouse-content {
@@ -376,6 +380,7 @@ body {
     border-radius: 8px;
     padding: 12px;
     flex: 1;
+    min-width: 0;
 }
 
 .mic-content {
