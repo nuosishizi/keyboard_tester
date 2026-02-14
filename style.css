@@ -60,7 +60,7 @@ body {
 .main-grid {
     display: grid;
     grid-template-columns: 1fr 300px;
-    gap: 10px;
+    gap: 6px;
     flex: 1;
     min-height: 0;
 }

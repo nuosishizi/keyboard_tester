@@ -177,7 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error('获取设备失败:', err);
-            micSelect.innerHTML = '<option value="">设备访问失败</option>';
+            // Check if it's a file:// protocol issue
+            if (window.location.protocol === 'file:') {
+                micSelect.innerHTML = '<option value="">⚠️ 本地file://无法访问麦克风，请使用HTTPS</option>';
+            } else {
+                micSelect.innerHTML = '<option value="">设备访问失败</option>';
+            }
             micStartBtn.disabled = true;
         }
     }
