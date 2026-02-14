@@ -93,50 +93,107 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 12px;
+    padding: 15px;
     overflow: hidden;
+    max-width: 1450px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .keyboard {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
+}
+
+/* 功能键行 */
+.function-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #222;
+}
+
+.fn-spacer {
+    width: 30px;
+}
+
+.fn-spacer-sm {
+    width: 12px;
+}
+
+.fn-group {
+    display: flex;
+    gap: 6px;
+}
+
+.region-spacer {
+    width: 40px;
+}
+
+/* 主键盘区域容器 */
+.main-keyboard-area {
+    display: flex;
+    gap: 20px;
+}
+
+/* 主键盘区 */
+.main-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .kb-row {
     display: flex;
-    gap: 3px;
-    align-items: center;
+    gap: 6px;
 }
 
-.kb-main {
-    display: flex;
-    gap: 8px;
-}
-
-.kb-main-left {
+/* 编辑键区 */
+.edit-keys {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
-.kb-nav,
-.kb-numpad {
+.edit-group-top,
+.edit-group-mid {
+    display: flex;
+    gap: 6px;
+}
+
+.edit-spacer {
+    height: 12px;
+}
+
+.arrow-area {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
-.numpad-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
+.arrow-row-top {
+    display: flex;
+    justify-content: center;
 }
 
-.arrow-keys {
+.arrow-row-bottom {
+    display: flex;
+    gap: 6px;
+}
+
+/* 数字键盘区 */
+.numpad-keys {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 6px;
+}
+
+.numpad-row {
+    display: flex;
+    gap: 6px;
+    position: relative;
 }
 
 /* Key Styles */
@@ -145,62 +202,80 @@ body {
     color: var(--text-primary);
     border: 1px solid var(--border);
     border-radius: 4px;
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.1s ease;
 }
 
 .key.k-sm {
-    width: 30px;
-    height: 28px;
-    font-size: 0.65rem;
+    width: 50px;
+    height: 50px;
+    font-size: 0.85rem;
 }
 
-.key.k-wide {
-    width: 50px;
+/* 特殊按键尺寸 */
+.key.k-backspace {
+    width: 100px;
 }
 
 .key.k-tab {
-    width: 46px;
+    width: 75px;
+}
+
+.key.k-backslash {
+    width: 75px;
 }
 
 .key.k-caps {
-    width: 52px;
+    width: 90px;
 }
 
-.key.k-shift {
-    width: 70px;
+.key.k-enter {
+    width: 110px;
+}
+
+.key.k-shift-left {
+    width: 120px;
+}
+
+.key.k-shift-right {
+    width: 140px;
 }
 
 .key.k-ctrl {
-    width: 42px;
+    width: 70px;
 }
 
-.key.k-win,
+.key.k-win {
+    width: 65px;
+}
+
 .key.k-alt {
-    width: 38px;
+    width: 65px;
 }
 
 .key.k-menu {
-    width: 38px;
+    width: 65px;
 }
 
 .key.k-space {
     flex: 1;
 }
 
-.key.k-enter-big {
-    width: 62px;
+.key.k-wide-numpad {
+    width: 106px;
 }
 
 .key.k-tall {
-    grid-row: span 2;
+    position: absolute;
+    right: 0;
+    height: 106px;
 }
 
 .key.active {
@@ -208,22 +283,6 @@ body {
     color: #000;
     box-shadow: 0 0 12px var(--accent-glow);
     transform: translateY(-1px);
-}
-
-.spacer {
-    width: 28px;
-}
-
-.spacer-sm {
-    width: 14px;
-}
-
-.spacer-vert {
-    height: 8px;
-}
-
-.key-gap {
-    width: 30px;
 }
 
 /* Side Panel - 已移除，改为bottom-panel */
@@ -545,18 +604,4 @@ body {
 .clear-btn:hover {
     background: var(--border);
     color: var(--text-primary);
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 1600px) {
-    .key {
-        width: 28px;
-        height: 28px;
-        font-size: 0.65rem;
-    }
-
-    .key.k-sm {
-        width: 26px;
-        height: 26px;
-    }
 }

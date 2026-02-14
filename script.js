@@ -19,8 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); // Block all default behaviors
         e.stopPropagation();
 
-        const code = e.code;
+        let code = e.code;
+
+        // 修复：某些键盘的右Shift返回空code（location可能为0或2，都要支持）
+        if (code === '' && e.keyCode === 16) {
+            code = 'ShiftRight';
+        }
+
         const keyElement = keyMap.get(code);
+
+        // 调试：输出键码信息
+        console.log(`Key pressed: code="${code}", key="${e.key}", keyCode=${e.keyCode}, location=${e.location}`);
 
         // Update display
         keyDisplay.textContent = `${code} (${e.key})`;
@@ -28,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Visual feedback
         if (keyElement) {
             keyElement.classList.add('active');
+        } else {
+            console.warn(`⚠️ Key not found in map: ${code}`);
         }
 
         // Add to history
@@ -161,28 +172,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enumerate audio input devices
     async function enumerateDevices() {
         try {
+            // 检查是否支持
+            if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+                throw new Error('不支持媒体设备API');
+            }
+
+            // 先请求一次权限，这样才能获取设备标签
+            let permissionGranted = false;
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                stream.getTracks().forEach(track => track.stop()); // 立即停止
+                permissionGranted = true;
+            } catch (err) {
+                console.warn('麦克风权限请求失败:', err);
+            }
+
+            // 枚举设备
             const devices = await navigator.mediaDevices.enumerateDevices();
             const audioInputs = devices.filter(device => device.kind === 'audioinput');
 
             micSelect.innerHTML = '<option value="">选择麦克风...</option>';
-            audioInputs.forEach(device => {
+
+            if (audioInputs.length === 0) {
+                micSelect.innerHTML = '<option value="">未找到麦克风设备</option>';
+                micStartBtn.disabled = true;
+                return;
+            }
+
+            audioInputs.forEach((device, index) => {
                 const option = document.createElement('option');
                 option.value = device.deviceId;
-                option.textContent = device.label || `麦克风 ${micSelect.options.length}`;
+                // 如果有权限，显示真实标签；否则显示通用名称
+                option.textContent = device.label || `麦克风 ${index + 1}`;
                 micSelect.appendChild(option);
             });
 
-            if (audioInputs.length === 0) {
-                micSelect.innerHTML = '<option value="">未找到麦克风</option>';
-                micStartBtn.disabled = true;
-            }
+            micStartBtn.disabled = false;
+            console.log(`✅ 找到 ${audioInputs.length} 个麦克风设备`);
+
         } catch (err) {
             console.error('获取设备失败:', err);
-            // Check if it's a file:// protocol issue
+
+            // 检查是否是file://协议
             if (window.location.protocol === 'file:') {
-                micSelect.innerHTML = '<option value="">⚠️ 本地file://无法访问麦克风，请使用HTTPS</option>';
+                micSelect.innerHTML = '<option value="">⚠️ file://协议不支持麦克风，请部署到HTTPS服务器</option>';
             } else {
-                micSelect.innerHTML = '<option value="">设备访问失败</option>';
+                micSelect.innerHTML = `<option value="">❌ 设备访问失败: ${err.message}</option>`;
             }
             micStartBtn.disabled = true;
         }
@@ -211,7 +246,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 micStartBtn.style.background = '#ff4444';
             } catch (err) {
                 console.error('启动麦克风失败:', err);
-                alert('无法访问麦克风，请检查权限设置');
+                let errorMsg = '无法启动麦克风';
+
+                if (err.name === 'NotAllowedError') {
+                    errorMsg = '麦克风权限被拒绝，请在浏览器设置中允许麦克风访问';
+                } else if (err.name === 'NotFoundError') {
+                    errorMsg = '未找到指定的麦克风设备';
+                } else if (err.name === 'NotReadableError') {
+                    errorMsg = '麦克风被其他应用占用';
+                } else if (window.location.protocol === 'file:') {
+                    errorMsg = 'file://协议不支持麦克风，请部署到HTTPS服务器（如GitHub Pages）';
+                }
+
+                alert(`❌ ${errorMsg}\n\n错误详情: ${err.message}`);
             }
         }
     });
